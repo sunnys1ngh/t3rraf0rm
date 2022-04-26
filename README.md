@@ -90,7 +90,21 @@ You can see that the ‘PLAN’ command outputs to screen what we are about to d
 
 So lets see if we can deploy successfully from our local machine. To do this we run the ‘Terraform apply‘ command. This will take a couple of minutes to run through, but at the end you should find you have all the resources in the resource group as we expected!
 
+So now we know that our Terraform code is working that is perfect. 
+However, when we ran the Terraform Apply, a few new files were created in our local folder:
 
+pay close attention to the ‘terraform.tfstate’ file. This file is where all the current configuration, that has been deployed into your subscription. This is the file that is used to compare any differences in your Terraform code and your main.tf file….. so the point here is, that currently, I would have to use my local PC all the time in order to deploy changes to our environment. This is fine if I have a small environment that is personal to me, or just for testing, but if I want to collaborate, or in fact use a service like Azure DevOps Pipelines to run my commands, I really need to store this state file in a location that is available to all, as well as securely store the credentials and update my Terraform code appropriately!
+
+That’s what we are going to look at in the next section. So we can use the ‘Terraform DESTROY‘ command to remove all the infrastructure from our subscription, so we can look at moving our state file to a centralised area.
+
+Terraform Code to deploy Azure Infrastructure with a shared state file.
+
+The next step in this process is to separate the Terraform State file off into a centralised location such as an Azure Storage account.
+
+This brings with it a few points we should be aware off.
+
+The storage account needs to be created before Terraform code is applied (we will use a bash script for this as a one off activity)
+Terraform accesses this Storage account via a Shared Secret key. This needs to be protected and not held in a script or certainly not stored in a Git Repository, we will explore options for storing this Key.
 
 
 
