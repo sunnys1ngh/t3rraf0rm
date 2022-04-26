@@ -120,3 +120,109 @@ If we now run Terraform init and Terraform plan, we should see that we successfu
 
 And in fact, our state file now does not exist locally, if we check the container of our storage account in Azure, here it is!
 
+Success!
+
+Make sure you commit and push your changes to your GitHub Repo, for the purposes of this part, 
+
+I have included a ‘.gitignore’ file, in order to ensure no files such as the the Terraform Provider EXE is uploaded into Github.
+
+Ok, so the next part of our journey now that we have successfully deployed our infrastructure using a shared location for our Terraform State, is to look to automat this based on the checking trigger to the ‘main’ GitHub repo branch.
+
+We also need to ensure we remove the Storage Account Access Key as part of the following process.
+
+The first thing we need to do is set ourselves up with an Azure DevOps Organization by visiting the following site:
+
+sunnysingh-dev and Terraform-Testing are the Organisation and Project I have created for the purposes of this article.
+
+5 – Azure DevOps Pipeline
+
+The first thing we are going to do is create a service principle name (SPN) to allow our Azure DevOps Organisation project to deploy our environment.
+
+Within our Azure DevOps Project we can select Project Settings -> Service Connections:
+
+Click Create Service Connection -> Azure Resource Manager -> Next:
+
+Then Select Service principal (automatic) -> Next:
+
+These are the scope settings for my SPN that were used:
+
+sunnysingh-dev and Terraform-Testing are the Organisation and Project I have created for the purposes of this article.
+
+The first thing we are going to do is create a service principle name (SPN) to allow our Azure DevOps Organisation project to deploy our environment.
+
+Within our Azure DevOps Project we can select Project Settings -> Service Connections:
+
+Click Create Service Connection -> Azure Resource Manager -> Next:
+
+Then Select Service principal (automatic) -> Next:
+
+Scope settings for my SPN
+
+You can confirm configuration of your SPN by reviewing the following output:
+
+Allow this SPN COntributer access to my Sub
+
+With all that in place its now time to create our pipeline
+
+Select Pipelines -> Create Pipeline:
+
+Select GitHub:
+
+ I will use the classic editor as it saves a little processing of YAML files if you are not familiar with those.
+
+Select Github and logon:
+
+Logon to your GitHub Account:
+
+Scroll down to Repository Access and select your repo, then click Approve and install:
+
+This will authorise ADO to access your GitHub Repo, next we want to select Github:
+
+For the purposes of this article we will set up a single stage to our pipeline which will run through :
+
+Install Terraform
+Run Terraform init
+Run Terraform plan
+Run Terraform validate & apply to deploy our infrastructure to our subscription.
+The trigger for this pipeline run will be the commit of code to our ‘main’ branch in our repo.
+
+We will select an Empty Pipeline to start creating our pipeline:
+
+We are then presented with a pipeline to start building:
+
+Next we want to select each Task and configure as follows.
+
+Install Terraform:
+
+Terraform: INIT
+
+In this task, we can configure the Terraform Backend that we have in our main.tf as follows:
+
+Terraform: PLAN
+
+Terraform VALIDATE & APPLY
+
+Once we have completed that configuration we can save it and we are presented by a pipeline yet to be run:
+
+
+Once we have completed that configuration we can save it and we are presented by a pipeline yet to be run:
+
+
+So, before we run our pipeline we could manually kick this off by selecting:
+
+However, in the spirit of CI/CD we can modify the CI enabled flag on our pipeline
+
+Now when we modify our code and commit it to our ‘master’ branch in GitHub this Pipeline should run and deploy our environment for us………
+
+I commit a change via VS Code:
+
+And Push to my GitHub Repo:
+
+We wait for all our tasks to complete (and hope we dont have any errors!)
+
+Our Job has completed successfully.
+
+If we check our Azure Subscription, we can see that our Application infrastructure has been deployed as we would expect!
+
+The concept that the pipeline is actually created as a file with a .yaml extension leads to even more interesting concepts
+
