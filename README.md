@@ -81,5 +81,16 @@ To set Context from my subscription I type: ‘az account set —subscription �
 
 Now lets get on with our Terraform Code, I will keep this deployment simple by storing all my configuration in a single ‘main.tf’ file, so right click your open folder and create a new file called ‘main.tf‘
 
+We will first run a ‘Terraform init‘ which initialises the backend.....
+
+Now we will check to see what Terraform is going to do in our Azure Environment by running a ‘Terraform plan‘ 
+This output is longer than this screen shot, but this is the start:
+
+You can see that the ‘PLAN’ command outputs to screen what we are about to do in our environment, this being to add 6 items in my case.
+
+So lets see if we can deploy successfully from our local machine. To do this we run the ‘Terraform apply‘ command. This will take a couple of minutes to run through, but at the end you should find you have all the resources in the resource group as we expected!
+
+
+
 
 
