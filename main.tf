@@ -47,7 +47,7 @@ resource "azurerm_storage_account" "sunnysinghstr" {
 }
 # Create our vNIC for our VM and assign it to our Virtual Machines Subnet
 resource "azurerm_network_interface" "vmnic" {
-  name                = "jonnychipzvm01nic"
+  name                = "sunnysinghvm01nic"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   
@@ -58,8 +58,8 @@ resource "azurerm_network_interface" "vmnic" {
   }
 }
 # Create our Virtual Machine - Jonnychipz-VM01
-resource "azurerm_virtual_machine" "jonnychipzvm01" {
-  name                  = "jonnychipzvm01"
+resource "azurerm_virtual_machine" "sunnysinghvm01" {
+  name                  = "sunnysingh"
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.vmnic.id]
@@ -71,14 +71,14 @@ resource "azurerm_virtual_machine" "jonnychipzvm01" {
     version   = "latest"
   }
   storage_os_disk {
-    name              = "jonnychipzvm01os"
+    name              = "sunnysinghos"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name      = "jonnychipzvm01"
-    admin_username     = "jonnychipz"
+    computer_name      = "sunnysingh01"
+    admin_username     = "ss1n9h"
     admin_password     = "Password123$"
   }
   os_profile_windows_config {
