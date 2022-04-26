@@ -65,5 +65,21 @@ Please follow the following steps
 11. That should be all that's required. any newly created file should be available on github after stage/commit/push.
 
 
-Make sure you have access to an Azure Subscription that can be utilised to deploy infrastructure into. 
+Make sure you have access to an Azure Subscription that can be utilised to deploy infrastructure into.
+
+Within VSCode Terminal browse to your newly cloned Repo folder on your local machine and type code . (don’t forget the fullstop!)
+
+This opens up our working folder in VS Code.
+
+Next type ‘az login‘
+
+This will take you off to an OAUTH web page for you to enter your Azure Credentials to authenticate your terminal session. Remember at this stage we are going to authenticate our local machine so we can test our Terraform code before we look to deploy it using Azure DevOps Pipelines.
+
+You will be presented with your subscription in JSON format, if you have multiple subscriptions then you will need to set the context to the subscription you would like to use. We can use either the Subscription ID, or the Subscription name.
+
+To set Context from my subscription I type: ‘az account set —subscription “MPN – John Lunn”‘
+
+Now lets get on with our Terraform Code, I will keep this deployment simple by storing all my configuration in a single ‘main.tf’ file, so right click your open folder and create a new file called ‘main.tf‘
+
+
 
