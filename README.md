@@ -106,5 +106,17 @@ This brings with it a few points we should be aware off.
 The storage account needs to be created before Terraform code is applied (we will use a bash script for this as a one off activity)
 Terraform accesses this Storage account via a Shared Secret key. This needs to be protected and not held in a script or certainly not stored in a Git Repository, we will explore options for storing this Key.
 
+access_key: 1NE2Sa3lPmzYEJ/gb4Pl/1r3C70AijIMzetf97Ac0CDyNZ/qy1xrvcyDNbPoV4IavbMRYk0NTaCOO3Ei42XwLQ==~
 
+If we check our Azure subscription, we can now see we have the storage account and container created ready to store our Terraform State file:
+
+Configure state backend – Terraform
+
+Great, so our next task is to modify our main.tf Terraform script to enable Terraform to utilise this shared state location and accessing it via the Key Vault by configuring what is known as the ‘state back end’. As mentioned previously, we could put the Storage Account access key directly into our Terraform file, but clearly that is not best practise as we will be storing out main.tf in a Git Repo so that would be a security concern so hence the Key Vault!
+
+For now, until we move into the Azure DevOps Pipelines we will create the backend config with the raw Access Key, to demonstrate we just need to add the following to our terraform main.tf file to allow terraform to stare the state file in a certral location, our Azure Storage Account.
+
+If we now run Terraform init and Terraform plan, we should see that we successfully create a Plan:
+
+And in fact, our state file now does not exist locally, if we check the container of our storage account in Azure, here it is!
 

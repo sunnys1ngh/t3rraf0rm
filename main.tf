@@ -1,4 +1,12 @@
 terraform {
+  backend "azurerm" {
+    resource_group_name  = "sunnysingh-infra"
+    storage_account_name = "sunnysinghtstate"
+    container_name       = "tstate"
+    key                  = "1NE2Sa3lPmzYEJ/gb4Pl/1r3C70AijIMzetf97Ac0CDyNZ/qy1xrvcyDNbPoV4IavbMRYk0NTaCOO3Ei42XwLQ==~"
+  }
+}
+terraform {
   required_providers {
     azurerm = {
       # Specify what version of the provider we are going to utilise
