@@ -28,7 +28,7 @@ We are going to look to deploy the following basic landing zone into our Azure S
 
 1               – GitHub Repo
 2               – Azure Subscription to contain the infrastructure we are going to deploy
-3.1             – Terraform Code to deploy Azure Infrastructure from local machine (JONNYCHIPS-APP01):
+3.1             – Terraform Code to deploy Azure Infrastructure from local machine (sunnysingh-APP01):
                     Resource Group
                     Virtual Network
                     Virtual Machine
@@ -72,7 +72,7 @@ This will take you off to an OAUTH web page for you to enter your Azure Credenti
 
 You will be presented with your subscription in JSON format, if you have multiple subscriptions then you will need to set the context to the subscription you would like to use. We can use either the Subscription ID, or the Subscription name.
 
-To set Context from my subscription I type: ‘az account set —subscription “MPN – John Lunn”‘
+To set Context from my subscription I type: ‘az account set —subscription “MPN – Sunny Singh”‘
 
 Now lets get on with our Terraform Code, I will keep this deployment simple by storing all my configuration in a single ‘main.tf’ file, so right click your open folder and create a new file called ‘main.tf‘
 
